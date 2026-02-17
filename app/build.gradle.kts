@@ -42,4 +42,5 @@ android {
 dependencies {
     implementation(project(":ui"))
     implementation(project(":core:di"))
+    implementation(libs.androidx.junit.ktx)
 }
