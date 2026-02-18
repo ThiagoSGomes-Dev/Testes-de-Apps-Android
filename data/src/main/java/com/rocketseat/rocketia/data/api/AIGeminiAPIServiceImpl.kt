@@ -9,7 +9,7 @@ class AIGeminiAPIServiceImpl : AIAPIService {
 
     private val generativeModel = GenerativeModel(
         modelName = GENERATIVE_MODEL_NAME,
-        apiKey = BuildConfig.apiKey
+        apiKey = BuildConfig.API_KEY
     )
 
     override suspend fun sendPrompt(stack: String, question: String): String? =
