@@ -97,5 +97,16 @@ class ExampleUnitTest {
 
         }
 
+        // shadow: fake especifico (Roboletric) que substitui um conjunto de classes (framework android).
+        @Test
+        fun `example shadow`() {
+            val context = RuntimeEnvironment.getApplication()
+
+            Toast.makeText(context, "Hello World!", Toast.LENGTH_SHORT).show()
+
+            // Existe uma lista de shadow disponiveis para roboletric
+            assertEquals("Hello World!", ShadowToast.getTextOfLatestToast())
+        }
+
     }
 }
