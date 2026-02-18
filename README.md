@@ -39,3 +39,27 @@
 ### Maestro
 
 `- launchApp - tapOn: "Login" - inputText: "user@example.com" - assertVisible: "Bem-vindo"`
+
+***Dummy, Fake, Stub (e Mock/Spy) -> são tipos de objetos de teste (test doubles)***
+
+```kotlin
+// Fake: implementação de teste funcional de uma interface, porém simplificada.
+//       Possui comportamento real, mas reduzido, sem todas as regras de produção.
+
+// Dummy: objeto usado apenas para satisfazer parâmetros obrigatórios.
+//        Não é utilizado na lógica do teste.
+
+// Stub: objeto que retorna valores pré-definidos.
+//       Não valida chamadas nem interações.
+```
+***Arrange–Act–Assert (AAA) → é estrutura do teste***
+
+```kotlin
+// Arrange: prepara cenário.
+
+// Act: executa a ação.
+
+// Assert: verifica o resultado.
+```
+
+OBS: ```AAA``` organiza o fluxo do teste. ```Dummy, Fake, Stub (test doubles)``` define como você substitui dependências.
