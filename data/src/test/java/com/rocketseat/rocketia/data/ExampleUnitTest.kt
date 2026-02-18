@@ -73,5 +73,29 @@ class ExampleUnitTest {
             stubAIChatRemoteDataSourceImpl.getAIChatByStack(stack = "Java")
             assertEquals(3, result.size)
         }
+
+        // mock: objeto configurado para retornar valores fixos, possibilitando verificar interações.
+        // spy: wrapper sobre objeto real que registra suas interações.
+        @Test
+        fun `example mock end spy`() = runTest {
+            // arrange
+            val fakeAIChatLocalDataSourceImpl = FakeAIChatLocalDataSourceImpl()
+
+            val mockAIChatRemoteDataSourceImpl = mockk<AIChatRemoteDataSource>(relaxed = true)
+            val spyAIChatLocalDataSourceImpl = spyk<AIChatLocalDataSource>(fakeAIChatLocalDataSourceImpl)
+
+            val testRepository = AIChatRepositoryImpl(
+                aiChatLocalDataSource = spyAIChatLocalDataSourceImpl,
+                aiChatRemoteDataSource = mockAIChatRemoteDataSourceImpl
+            )
+            // act
+            testRepository.sendUserQuestion("question")
+
+            // assert
+            coVerify(exactly = 1) { mockAIChatRemoteDataSourceImpl.sendPrompt(any(), any()) }
+            coVerify(exactly = 1) { spyAIChatLocalDataSourceImpl.insertAIChatConversation(any(), any()) }
+
+        }
+
     }
 }
