@@ -15,6 +15,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", (project.findProperty("API_KEY") ?: "\"\"") as String)
+
     }
 
     buildTypes {
@@ -42,4 +45,5 @@ android {
 dependencies {
     implementation(project(":ui"))
     implementation(project(":core:di"))
+    implementation(libs.androidx.junit.ktx)
 }
