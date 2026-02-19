@@ -62,4 +62,14 @@
 // Assert: verifica o resultado.
 ```
 
+***Given-When-Then (GWT) → é mais indicado quando o foco do teste é comportamento, não implementação***
+
+```kotlin
+// Given: dado o contexto.
+
+// When: quando algo acontece.
+
+// Then: então espero um resultado.
+```
+
 OBS: ```AAA``` organiza o fluxo do teste. ```Dummy, Fake, Stub (test doubles)``` define como você substitui dependências.
