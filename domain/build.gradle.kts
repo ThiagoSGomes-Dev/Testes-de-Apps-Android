@@ -34,4 +34,8 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.junit.ktx)
+
+    testImplementation(project(":data"))
+    testImplementation(kotlin("test"))
 }
