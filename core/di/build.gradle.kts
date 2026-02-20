@@ -41,5 +41,7 @@ dependencies {
     implementation(libs.bundles.room)
     api(libs.koin.android)
     implementation(libs.dagger.hilt.android)
+    implementation(libs.androidx.junit.ktx)
     ksp(libs.dagger.hilt.compiler)
+    testImplementation(kotlin("test"))
 }

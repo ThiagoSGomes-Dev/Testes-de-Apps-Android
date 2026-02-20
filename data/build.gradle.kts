@@ -42,6 +42,7 @@ dependencies {
 
     implementation(libs.generativeai)
     implementation(libs.bundles.room)
+    implementation(libs.androidx.junit.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.datastore.preferences)
 

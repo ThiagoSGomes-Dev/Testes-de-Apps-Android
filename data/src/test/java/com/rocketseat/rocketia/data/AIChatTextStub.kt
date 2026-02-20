@@ -5,7 +5,7 @@ import com.rocketseat.rocketia.domain.model.AIChatTextType
 
 fun createAIChatTextEntityStub(from: AIChatTextType?, text: String = "text"): AIChatTextEntity =
     AIChatTextEntity(
-        from = from?.name.orEmpty(),
+        from = from?.name ?: "UNKNOWN",
         stack = "stack",
         datetime = 0L,
         text = text
