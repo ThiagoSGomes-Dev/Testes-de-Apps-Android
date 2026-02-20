@@ -13,11 +13,9 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
@@ -44,7 +42,7 @@ class ExampleUnitTest {
     // Não valida chamadas nem interações.
 
     @Test
-    fun `example fake dummy end`() = runTest {
+    fun example_fake_dummy_end() = runTest {
         // arrange -> preparar cenário
         val fakeAIChatRemoteDataSourceImpl =
             FakeAIChatRemoteDataSourceImpl(validStacks = listOf("Kotlin"))
@@ -77,7 +75,7 @@ class ExampleUnitTest {
         // mock: objeto configurado para retornar valores fixos, possibilitando verificar interações.
         // spy: wrapper sobre objeto real que registra suas interações.
         @Test
-        fun `example mock end spy`() = runTest {
+        fun example_mock_end_spy() = runTest {
             // arrange
             val fakeAIChatLocalDataSourceImpl = FakeAIChatLocalDataSourceImpl()
 
@@ -99,7 +97,7 @@ class ExampleUnitTest {
 
         // shadow: fake especifico (Roboletric) que substitui um conjunto de classes (framework android).
         @Test
-        fun `example shadow`() {
+        fun example_shadow() {
             val context = RuntimeEnvironment.getApplication()
 
             Toast.makeText(context, "Hello World!", Toast.LENGTH_SHORT).show()
