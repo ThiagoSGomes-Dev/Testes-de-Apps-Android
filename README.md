@@ -78,3 +78,157 @@ OBS: ```AAA``` organiza o fluxo do teste. ```Dummy, Fake, Stub (test doubles)```
 
 ```@Rule``` é um mecanismo flexível para adicionar, alterar ou interceptar comportamentos de testes, agindo como um "gancho" (hook) antes e depois da execução de cada método de teste.
 
+```@Test``` Diz pro JUnit “isso aqui é um teste que deve ser executado”, Sem isso, o método é ignorado.
+
+2. Nome do teste
+fun `when fetching data then request correct endpoint`
+
+### Nome descritivo (BDD):
+
+when → ação: buscar dados
+
+then → resultado: chamar endpoint correto
+
+É basicamente documentação viva.
+
+🔹 3. runCatching { ... }
+runCatching { apiRule.service.getAlgumaCoisa().blockingGet() }
+O que acontece aqui:
+
+Você chama sua API (getAlgumaCoisa())
+
+Usa .blockingGet() (provavelmente RxJava) pra executar de forma síncrona
+
+Qualquer erro é capturado silenciosamente
+
+🤔 Por que usar isso?
+
+Porque você não está testando a resposta da API, só quer:
+
+👉 disparar a requisição HTTP
+
+Se der erro (ex: JSON vazio), não importa aqui.
+
+🔹 4. apiRule.service.getAlgumaCoisa()
+
+👉 Esse service é o Retrofit criado dentro da sua ApiTestRule.
+
+Mas ao invés de bater na internet:
+
+👉 Ele chama o MockWebServer
+
+🔹 5. .blockingGet()
+
+👉 Vem do RxJava.
+
+Serve pra:
+
+Executar a chamada de forma síncrona
+
+Esperar a resposta antes de continuar
+
+Sem isso, o teste poderia terminar antes da requisição acontecer.
+
+🔹 6. apiRule.server.takeRequest()
+val request = apiRule.server.takeRequest()
+
+🔥 Aqui está o coração do teste.
+
+👉 O MockWebServer guarda todas as requisições feitas.
+
+Esse método:
+
+Pega a próxima requisição feita
+
+Retorna um objeto com:
+
+método (GET, POST…)
+
+path
+
+headers
+
+body
+
+🔹 7. assertEquals("GET", request.method)
+assertEquals("GET", request.method)
+
+👉 Verifica:
+
+“A requisição foi do tipo GET?”
+
+Se não for → teste falha ❌
+
+🔹 8. assertEquals("/minha/rota/aqui/", request.path)
+assertEquals("/minha/rota/aqui/", request.path)
+
+👉 Verifica:
+
+“A URL chamada foi exatamente essa?”
+
+🧠 Fluxo completo (resumido)
+
+Teste começa
+
+Você chama a API (via Retrofit)
+
+Retrofit chama o MockWebServer
+
+O servidor fake registra a requisição
+
+Você captura essa requisição
+
+Valida método + rota
+
+🎯 O que esse teste garante
+
+Ele valida que:
+
+Seu @GET("minha/rota/aqui/") está correto
+
+Seu Retrofit está configurado certo
+
+A chamada HTTP é feita como esperado
+
+⚠️ O que ele NÃO testa
+
+Conteúdo da resposta
+
+Parsing do JSON
+
+Regra de negócio
+
+Navegação (onboarding etc.)
+
+🧠 Insight importante
+
+Esse teste é sobre:
+
+👉 contrato da API
+
+Se alguém mudar isso:
+
+@GET("rota_errada")
+
+👉 seu teste quebra imediatamente 💥
+
+🚀 Evoluções naturais desse teste
+
+Você pode evoluir pra validar:
+
+Headers
+assertEquals("application/json", request.getHeader("Content-Type"))
+Query params
+assertTrue(request.path!!.contains("id=123"))
+Body (POST)
+assertEquals("{...}", request.body.readUtf8())
+💥 Resumo direto
+
+Cada parte do teste:
+
+Parte	Função
+runCatching	dispara a requisição sem quebrar o teste
+service	Retrofit chamando servidor fake
+takeRequest()	captura o que foi enviado
+assertEquals	valida comportamento
+
