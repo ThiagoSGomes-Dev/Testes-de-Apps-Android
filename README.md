@@ -85,9 +85,10 @@ fun `when fetching data then request correct endpoint`
 
 ### Nome descritivo (BDD):
 
-when → ação: buscar dados
-
-then → resultado: chamar endpoint correto
+|      |                    |
+|------|--------------------|
+| When | Ação: buscar dados |
+| Then | Resultado: chamar endpoint correto |
 
 É basicamente documentação viva.
 
