@@ -73,3 +73,8 @@
 ```
 
 OBS: ```AAA``` organiza o fluxo do teste. ```Dummy, Fake, Stub (test doubles)``` define como você substitui dependências.
+
+### Testes em Api
+
+```@Rule``` é um mecanismo flexível para adicionar, alterar ou interceptar comportamentos de testes, agindo como um "gancho" (hook) antes e depois da execução de cada método de teste.
+
