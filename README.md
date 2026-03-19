@@ -105,10 +105,24 @@ flowOf(1, 2).test {
 #### Arrange-Act-Assert (AAA)
  
 Organiza o **fluxo** do teste.
+
+#### Given-When-Then (GWT)
+ 
+Mais indicado quando o foco é **comportamento**, não implementação.
+ 
+```kotlin
+// Given: dado o contexto.
+// When: quando algo acontece.
+// Then: então espero um resultado.
+```
  
 ```kotlin
 // Arrange: prepara cenário.
 // Act: executa a ação.
 // Assert: verifica o resultado.
 ```
+
+> `AAA` organiza o fluxo do teste. `Dummy`, `Fake`, `Stub` (test doubles) define como você substitui dependências.
+ 
+---
  
