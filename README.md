@@ -199,5 +199,148 @@ assertEquals("/minha/rota/aqui/", request.path)
 ```
  
 ---
+
+### Fluxo completo
+ 
+```
+Teste inicia
+    -> Retrofit chama o MockWebServer
+    -> Servidor fake registra a requisicao
+    -> takeRequest() captura os dados enviados
+    -> Assertions validam metodo e rota
+```
+ 
+---
+ 
+### O que esse teste garante (e o que nao garante)
+ 
+| Garante | Nao garante |
+|---------|-------------|
+| Anotacao `@GET("...")` correta | Conteudo da resposta |
+| Retrofit configurado corretamente | Parsing do JSON |
+| Chamada HTTP feita como esperado | Regras de negocio |
+| Contrato da API | Navegacao entre telas |
+ 
+Se alguem alterar `@GET("rota_errada")`, o teste falha imediatamente.
+ 
+---
+ 
+### Evolucoes naturais
+ 
+```kotlin
+// Validar headers
+assertEquals("application/json", request.getHeader("Content-Type"))
+ 
+// Validar query params
+assertTrue(request.path!!.contains("id=123"))
+ 
+// Validar body (POST)
+assertEquals("{...}", request.body.readUtf8())
+```
+ 
+---
+ 
+### Tabela resumo
+ 
+| Parte            | Funcao                                      |
+|------------------|---------------------------------------------|
+| `runCatching`    | Dispara a requisicao sem quebrar o teste    |
+| `service`        | Retrofit apontando para o servidor fake     |
+| `takeRequest()`  | Captura o que foi enviado ao MockWebServer  |
+ 
+---
+ 
+## Robolectric em Profundidade
+ 
+### O que e o Robolectric?
+ 
+Robolectric e um framework que permite executar testes de codigo Android diretamente na **JVM**, sem necessidade de um emulador ou dispositivo fisico. Ele faz isso implementando **"shadows"** (sombras) das classes do Android SDK, simulando seu comportamento em tempo de execucao.
+ 
+Sem o Robolectric, qualquer classe do Android (`Activity`, `Context`, `View`, etc.) lancaria `RuntimeException` ao ser instanciada fora de um ambiente Android real.
+ 
+---
+ 
+### Como funciona internamente
+ 
+Quando voce chama:
+ 
+```kotlin
+val activity = Robolectric.buildActivity(MainActivity::class.java).setup().get()
+```
+ 
+O Robolectric executa internamente uma sequencia de etapas:
+ 
+1. Cria uma instancia da `MainActivity` sem precisar de APK ou emulador.
+2. Simula o ciclo de vida do Android (`onCreate`, `onStart`, `onResume`) via `.setup()`.
+3. Retorna a instancia pronta para ser inspecionada via `.get()`.
+ 
+---
+ 
+### O ciclo de vida controlado
+ 
+O `ActivityController` do Robolectric permite controlar cada etapa do ciclo de vida manualmente:
+ 
+```kotlin
+val controller = Robolectric.buildActivity(MainActivity::class.java)
+ 
+controller.create()   // dispara onCreate()
+controller.start()    // dispara onStart()
+controller.resume()   // dispara onResume()
+controller.pause()    // dispara onPause()
+controller.stop()     // dispara onStop()
+controller.destroy()  // dispara onDestroy()
+ 
+// Ou tudo de uma vez:
+controller.setup()    // create + start + resume
+```
+ 
+Isso e util para testar comportamentos especificos de cada fase do ciclo de vida.
+ 
+---
+ 
+### Shadows
+ 
+Os *shadows* sao implementacoes paralelas das classes do Android SDK, escritas pelo time do Robolectric. Quando seu codigo chama `activity.getSystemService(...)`, por exemplo, o Robolectric intercepta essa chamada e delega ao shadow correspondente.
+ 
+Voce tambem pode criar shadows customizados para classes especificas que precisam de comportamento diferente nos testes.
+ 
+---
+ 
+### Quando usar Robolectric vs Espresso
+ 
+| Criterio                | Robolectric                         | Espresso                            |
+|-------------------------|-------------------------------------|-------------------------------------|
+| Ambiente de execucao    | JVM (sem emulador)                  | Emulador ou dispositivo fisico      |
+| Velocidade              | Rapido                              | Lento (inicializa o app real)       |
+| Fidelidade              | Simulada (shadows)                  | Alta (comportamento real do SO)     |
+| Ideal para              | Logica de UI, ciclo de vida, estado | Fluxos de navegacao, interacao real |
+ 
+---
+ 
+### Exemplo pratico: testando estado apos rotacao
+ 
+```kotlin
+@Test
+fun `deve manter o titulo apos rotacao de tela`() {
+    val controller = Robolectric.buildActivity(MainActivity::class.java).setup()
+    val activity = controller.get()
+ 
+    // Simula rotacao de tela (recria a Activity)
+    controller.configurationChange(Configuration().apply {
+        orientation = Configuration.ORIENTATION_LANDSCAPE
+    })
+ 
+    val rotatedActivity = controller.get()
+    assertEquals("Titulo esperado", rotatedActivity.title)
+}
+```
+ 
+---
+ 
+### Limitacoes do Robolectric
+ 
+- Nem todos os comportamentos do Android sao perfeitamente replicados pelos shadows. Casos muito especificos de hardware ou de versoes muito recentes do SDK podem se comportar de forma diferente.
+- Testes de animacoes e transicoes visuais nao sao confiaveis no Robolectric.
+- Para validar fluxos reais de navegacao com `Intent` entre `Activities`, o Espresso tende a ser mais adequado.
  
 Dispara a requisicao HTTP sem quebrar o teste em caso de erro (ex: JSON vazio). Aqui o objetivo e apenas **disparar a chamada**, nao validar a resposta.
