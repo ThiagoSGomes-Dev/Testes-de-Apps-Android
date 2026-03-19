@@ -165,3 +165,13 @@ fun `when fetching data then request correct endpoint`()
 O nome funciona como **documentacao viva** do comportamento esperado.
  
 ---
+
+### Anatomia de um teste de API
+ 
+#### `runCatching { ... }`
+ 
+```kotlin
+runCatching { apiRule.service.getAlgumaCoisa().blockingGet() }
+```
+ 
+Dispara a requisicao HTTP sem quebrar o teste em caso de erro (ex: JSON vazio). Aqui o objetivo e apenas **disparar a chamada**, nao validar a resposta.
