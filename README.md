@@ -150,3 +150,18 @@ O nome funciona como **documentacao viva** do comportamento esperado.
 **`@Test`** indica ao JUnit que o método deve ser executado como teste. Sem essa anotação, o método é ignorado.
  
 ---
+ 
+### Nomeando testes (BDD)
+ 
+```kotlin
+fun `when fetching data then request correct endpoint`()
+```
+ 
+| Parte  | Significado              |
+|--------|--------------------------|
+| `when` | Acao: buscar dados       |
+| `then` | Resultado: chamar endpoint correto |
+ 
+O nome funciona como **documentacao viva** do comportamento esperado.
+ 
+---
