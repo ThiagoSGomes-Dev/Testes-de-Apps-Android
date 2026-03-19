@@ -125,4 +125,13 @@ Mais indicado quando o foco é **comportamento**, não implementação.
 > `AAA` organiza o fluxo do teste. `Dummy`, `Fake`, `Stub` (test doubles) define como você substitui dependências.
  
 ---
+
+## Testes de API com MockWebServer
  
+### Anotações essenciais
+ 
+**`@Rule`** é um mecanismo flexível para adicionar, alterar ou interceptar comportamentos de testes. Age como um hook executado antes e depois de cada método de teste.
+ 
+**`@Test`** indica ao JUnit que o método deve ser executado como teste. Sem essa anotação, o método é ignorado.
+ 
+---
