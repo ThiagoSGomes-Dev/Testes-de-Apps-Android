@@ -169,6 +169,10 @@ O nome funciona como **documentacao viva** do comportamento esperado.
 ### Anatomia de um teste de API
  
 #### `runCatching { ... }`
+
+#### `.blockingGet()`
+ 
+Vem do RxJava. Executa a chamada de forma **sincrona**, garantindo que a requisicao seja concluida antes de prosseguir com as verificacoes.
  
 ```kotlin
 runCatching { apiRule.service.getAlgumaCoisa().blockingGet() }
