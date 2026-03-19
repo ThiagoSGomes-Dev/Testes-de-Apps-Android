@@ -129,6 +129,21 @@ Mais indicado quando o foco é **comportamento**, não implementação.
 ## Testes de API com MockWebServer
  
 ### Anotações essenciais
+
+### Nomeando testes (BDD)
+ 
+```kotlin
+fun `when fetching data then request correct endpoint`()
+```
+ 
+| Parte  | Significado              |
+|--------|--------------------------|
+| `when` | Acao: buscar dados       |
+| `then` | Resultado: chamar endpoint correto |
+ 
+O nome funciona como **documentacao viva** do comportamento esperado.
+ 
+---
  
 **`@Rule`** é um mecanismo flexível para adicionar, alterar ou interceptar comportamentos de testes. Age como um hook executado antes e depois de cada método de teste.
  
