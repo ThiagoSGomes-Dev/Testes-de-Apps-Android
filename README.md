@@ -190,5 +190,14 @@ O `MockWebServer` registra todas as requisicoes recebidas. Esse metodo retorna a
 - path
 - headers
 - body
+
+#### Assertions
+ 
+```kotlin
+assertEquals("GET", request.method)
+assertEquals("/minha/rota/aqui/", request.path)
+```
+ 
+---
  
 Dispara a requisicao HTTP sem quebrar o teste em caso de erro (ex: JSON vazio). Aqui o objetivo e apenas **disparar a chamada**, nao validar a resposta.
