@@ -99,4 +99,16 @@ flowOf(1, 2).test {
 ```
  
 ---
+
+### Estruturas de Teste
+ 
+#### Arrange-Act-Assert (AAA)
+ 
+Organiza o **fluxo** do teste.
+ 
+```kotlin
+// Arrange: prepara cenário.
+// Act: executa a ação.
+// Assert: verifica o resultado.
+```
  
