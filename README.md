@@ -177,5 +177,18 @@ Vem do RxJava. Executa a chamada de forma **sincrona**, garantindo que a requisi
 ```kotlin
 runCatching { apiRule.service.getAlgumaCoisa().blockingGet() }
 ```
+
+#### `takeRequest()`
+ 
+```kotlin
+val request = apiRule.server.takeRequest()
+```
+ 
+O `MockWebServer` registra todas as requisicoes recebidas. Esse metodo retorna a proxima requisicao da fila, com acesso a:
+ 
+- metodo HTTP (`GET`, `POST`, ...)
+- path
+- headers
+- body
  
 Dispara a requisicao HTTP sem quebrar o teste em caso de erro (ex: JSON vazio). Aqui o objetivo e apenas **disparar a chamada**, nao validar a resposta.
