@@ -345,7 +345,7 @@ fun `deve manter o titulo apos rotacao de tela`() {
 ### Given-When-Then: 
 - É padrão de organização de casos de teste em cenários claros, dividindo-os em condições iniciais, ações executadas e resultados esperados.
 
-Page Object:
+### Page Object:
 - É um padrão de design que ajuda a reutilizar objetos de testes para facilitar a manutenção de testes de UI automatizados.
 Data-Driven Testing: é um padrão que executa scripts de testes que acessa dados de entradas e saídas previstas a partir de arquivos de dados.
 
