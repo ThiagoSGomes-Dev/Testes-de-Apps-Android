@@ -339,6 +339,12 @@ fun `deve manter o titulo apos rotacao de tela`() {
  
 ### Limitacoes do Robolectric
 
+- Nem todos os comportamentos do Android sao perfeitamente replicados pelos shadows. Casos muito especificos de hardware ou de versoes muito recentes do SDK podem se comportar de forma diferente.
+- Testes de animacoes e transicoes visuais nao sao confiaveis no Robolectric.
+- Para validar fluxos reais de navegacao com `Intent` entre `Activities`, o Espresso tende a ser mais adequado.
+ 
+Dispara a requisicao HTTP sem quebrar o teste em caso de erro (ex: JSON vazio). Aqui o objetivo e apenas **disparar a chamada**, nao validar a resposta.
+
 ### AAA (Arrange-Act-Assert): 
 - É um padrão para organizar e formatar códigos em métodos de testes unitários, separando-os em etapas de preparação, execução e verificação.
 
@@ -357,9 +363,3 @@ Data-Driven Testing: é um padrão que executa scripts de testes que acessa dado
 
 ### TDD (Test Driven Development):
 - É uma metodologia para desenvolvimento e escrita de código, em que a codificação das funcionalidades começa a partir da escrita de testes unitários.
- 
-- Nem todos os comportamentos do Android sao perfeitamente replicados pelos shadows. Casos muito especificos de hardware ou de versoes muito recentes do SDK podem se comportar de forma diferente.
-- Testes de animacoes e transicoes visuais nao sao confiaveis no Robolectric.
-- Para validar fluxos reais de navegacao com `Intent` entre `Activities`, o Espresso tende a ser mais adequado.
- 
-Dispara a requisicao HTTP sem quebrar o teste em caso de erro (ex: JSON vazio). Aqui o objetivo e apenas **disparar a chamada**, nao validar a resposta.
