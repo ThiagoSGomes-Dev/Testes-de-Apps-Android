@@ -342,7 +342,7 @@ fun `deve manter o titulo apos rotacao de tela`() {
 ### AAA (Arrange-Act-Assert): 
 - É um padrão para organizar e formatar códigos em métodos de testes unitários, separando-os em etapas de preparação, execução e verificação.
 
-Given-When-Then: 
+### Given-When-Then: 
 - É padrão de organização de casos de teste em cenários claros, dividindo-os em condições iniciais, ações executadas e resultados esperados.
 
 Page Object:
