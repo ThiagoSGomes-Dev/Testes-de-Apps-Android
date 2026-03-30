@@ -349,9 +349,14 @@ fun `deve manter o titulo apos rotacao de tela`() {
 - É um padrão de design que ajuda a reutilizar objetos de testes para facilitar a manutenção de testes de UI automatizados.
 Data-Driven Testing: é um padrão que executa scripts de testes que acessa dados de entradas e saídas previstas a partir de arquivos de dados.
 
-### Mocking e Stubbing: é um padrão de teste em que objetos que ainda não foram criados são simulados para isolar componentes do sistema que possuem dependências externas e/ou fornecer respostas pré-definidas para chamadas de métodos.
-BDD (Behavior Driven Development): é um padrão que enfatiza a colaboração entre desenvolvedores, testadores e stakeholders que ajuda a criar cenários de teste usando vocabulário específico e enxuto, minimizando dificuldades de comunicação.
-TDD (Test Driven Development): é uma metodologia para desenvolvimento e escrita de código, em que a codificação das funcionalidades começa a partir da escrita de testes unitários.
+### Mocking e Stubbing:
+- É um padrão de teste em que objetos que ainda não foram criados são simulados para isolar componentes do sistema que possuem dependências externas e/ou fornecer respostas pré-definidas para chamadas de métodos.
+
+### BDD (Behavior Driven Development):
+- É um padrão que enfatiza a colaboração entre desenvolvedores, testadores e stakeholders que ajuda a criar cenários de teste usando vocabulário específico e enxuto, minimizando dificuldades de comunicação.
+
+### TDD (Test Driven Development):
+- É uma metodologia para desenvolvimento e escrita de código, em que a codificação das funcionalidades começa a partir da escrita de testes unitários.
  
 - Nem todos os comportamentos do Android sao perfeitamente replicados pelos shadows. Casos muito especificos de hardware ou de versoes muito recentes do SDK podem se comportar de forma diferente.
 - Testes de animacoes e transicoes visuais nao sao confiaveis no Robolectric.
