@@ -365,6 +365,6 @@ Data-Driven Testing: é um padrão que executa scripts de testes que acessa dado
 - É uma metodologia para desenvolvimento e escrita de código, em que a codificação das funcionalidades começa a partir da escrita de testes unitários.
 
 > [!TIP]
-> Testes Unitários vs Testes Instrumentados no Android
+> *Testes Unitários vs Testes Instrumentados no Android*
 > Testes Instrumentados (Instrumented Tests) Rodam em um dispositivo real ou emulador, dentro da Dalvik/ART.
 > Testes Unitários (Unit Tests). Rodam na JVM local da máquina de desenvolvimento, sem precisar de um dispositivo ou emulador.
