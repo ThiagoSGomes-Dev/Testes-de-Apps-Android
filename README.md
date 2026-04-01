@@ -364,5 +364,5 @@ Data-Driven Testing: é um padrão que executa scripts de testes que acessa dado
 ### TDD (Test Driven Development):
 - É uma metodologia para desenvolvimento e escrita de código, em que a codificação das funcionalidades começa a partir da escrita de testes unitários.
 
-> !Tip
+> [!TIP]
 > Testes Instrumentados (Instrumented Tests) Rodam em um dispositivo real ou emulador, dentro da Dalvik/ART.
